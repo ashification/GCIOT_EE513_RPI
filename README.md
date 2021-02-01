@@ -13,3 +13,7 @@ Uncomment the ll alias for ls -l
 to enable within session run the following, other wise close down and start new session
 pi@RPIGCIOT:~ $ exec bach
 
+
+
+Using the following to guide git repo setup and config on win and rpi machines
+https://projects.raspberrypi.org/en/projects/getting-started-with-git 
