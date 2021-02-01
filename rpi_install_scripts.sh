@@ -37,7 +37,8 @@ echo "Installing software and updates"
 sudo apt-get update
 sudo apt-get upgrade
 
-sudo apt-get install vim
+sudo apt-get install vim    # install the vim text editor
+sudo apt-get install git    # install git repo
 sudo apt-get install  nmap  # SSH
 sudo apt-get install  xrdp  # Remote PC
 sudo apt-get install  nmcli #
