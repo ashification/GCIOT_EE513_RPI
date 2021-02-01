@@ -1,2 +1,15 @@
 # GCIOT_EE513_RPI
 Version control and works pertaining to the GCIOT module EE513 Connected Embedded Systems 
+
+
+to utilise ll functionality on RPI navigate to home directory
+pi@RPIGCIOT:~/Documents $ cd ~
+
+then open the .bashrc file to edit
+pi@RPIGCIOT:~ $ vim .bashrc
+
+un comment the ll alias for ls -l 
+
+to enable within session run the following, other wise close down and start new session
+pi@RPIGCIOT:~ $ exec bach
+
