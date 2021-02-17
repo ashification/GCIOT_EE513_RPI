@@ -1,0 +1,18 @@
+sudo apt install git
+git config --global user.name "Harry Potter"
+git config --global user.email "h.potter@hogwarts.prof"
+git config --global core.editor vim
+mkdir snitch-sniffer
+cd snitch-sniffer
+ls // list dir content
+git init // initialise git repo
+ls -a // list all contents (inc hidden)
+ls -a .git // klist all contetns of the git repo
+git add README.md // add the readme to the git repo
+git add --all 
+git status
+git add --all
+git commit -am 'add json rules and python program' // adds comments to your commit
+git log -p <file name>
+git checkout 5fd772a292c019a7cf3012b1156685280d4a7d2d snitch-sniffer.py
+git commit -am 'restore find function'
