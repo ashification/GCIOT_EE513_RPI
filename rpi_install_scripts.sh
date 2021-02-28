@@ -37,20 +37,23 @@ echo "Installing software and updates"
 sudo apt-get update
 sudo apt-get upgrade
 
-sudo apt-get install vim    # install the vim text editor
-sudo apt-get install git    # install git repo
+sudo apt-get install  vim    # install the vim text editor
+sudo apt-get install  git    # install git repo
+sudo apt-get install  gcc    # install c/c++ compiler
+sudo apt-get install  i2c-tools # install i2c tools
+
 sudo apt-get install  nmap  # SSH
 sudo apt-get install  xrdp  # Remote PC
-sudo apt-get install  nmcli #
+sudo apt-get install  nmcli # Command-line tool for controlling NetworkManager
+
 sudo apt-get install  python
 sudo apt-get install  mysql-server
 sudo apt-get install  npm i bluetoothctl
-sudo apt-get install  bluez					#Bluetooth libraries
-sudo apt-get install  bluez-utils
-				#Bluetooth controls
- sudo apt-get install python-pip
- sudo apt-get install libglib2.0-dev
- sudo pip install bluepy
+sudo apt-get install  bluez  #Bluetooth libraries
+sudo apt-get install  bluez-utils #Bluetooth controls
+sudo apt-get install python-pip
+sudo apt-get install libglib2.0-dev
+sudo pip install bluepy
 
 sudo pip     install  pygatt
 sudo pip     install  "pygatt[GATTTOOL]"		 	 #Library relative to script being ran
