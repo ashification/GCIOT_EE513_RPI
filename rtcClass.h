@@ -25,19 +25,21 @@ class RTC{
    private:                // the following is part of the implementation
 	  int file;
 	  float temperature;
-	  char buf[BUFFER_SIZE];
 	  char writeBuffer[BUFFER_SIZE];
 	  time_t T;
 	  struct tm tm;
-	  void writeToBuffer(char buf_reg, int write_value);
 	  
    public:                 // part of the public interface
       RTC(); // the constructor -- create the object
+      
+      char buf[BUFFER_SIZE];
+
       virtual void readTime();
       virtual void readDate();
       virtual void readSystime();
-      virtual void readTemp();
+      float readTemp();
       virtual void writeSystime();
+      void writeToBuffer(char buf_reg, int write_value);
       virtual ~RTC();      // the destructor -- called automatically
 };
 
@@ -81,13 +83,15 @@ void RTC::readDate(){
 	cout << "The Current RTC Date is  " << bcdToDec(buf[4]) << "/" << bcdToDec(buf[5])<< "/" << bcdToDec(buf[6])<< endl;
 }
 
-void RTC::readTemp(){
+float RTC::readTemp(){
    temperature = buf[0x11] + ((buf[0x12]>>6)*0.25);
    cout << "\nThe Current RTC temperature reading is = "<< temperature << " Celsius\n\n " << endl;
+   return temperature;
 }
 
 void RTC::writeToBuffer(char buf_reg, int write_value){
-	buf[buf_reg] = write_value;
+        char value = decTobcd(write_value);
+	buf[buf_reg] = value;
 }
 
 void RTC::writeSystime(){
