@@ -19,6 +19,7 @@
 
 // the time is in the registers in encoded decimal form
 int bcdToDec(char b) { return (b/16)*10 + (b%16); }
+int decTobcd(char d) { return ((d/10) << 4 | (d%10));}
 
 int main(){
     	
@@ -54,6 +55,7 @@ int main(){
    
    printf("The RTC time is %02d:%02d:%02d\n", bcdToDec(buf[2]), bcdToDec(buf[1]), bcdToDec(buf[0]));
    printf("The RTC Date is %02d-%02d-%02d\n", bcdToDec(buf[4]), bcdToDec(buf[5]), bcdToDec(buf[6]));
+   printf("Buffer 2 = %d, Converted val = %d, Converted back = %d\n", buf[0], bcdToDec(buf[0]), decTobcd(bcdToDec(buf[0])));
 
    float temperature = buf[0x11] + ((buf[0x12]>>6)*0.25);
    printf("The current temperature is %.2f°C\n", temperature);
