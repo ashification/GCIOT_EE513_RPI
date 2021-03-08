@@ -63,10 +63,10 @@ RTC::RTC(){  // constructor implementation
 
 // This implementation function is "hidden" outside of the class
 void RTC::readSystime(){
-	//The following is modified from https://www.includehelp.com/c-programs/system-date-time-linux.aspx
+   //The following is modified from https://www.includehelp.com/c-programs/system-date-time-linux.aspx
    T= time(NULL);
    tm = *localtime(&T);
-   
+   // Structure calls refernced from library https://www.tutorialspoint.com/cplusplus/cpp_date_time.htm
    printf("\nCurrent System Date and Time Values\n");   
    printf("System Time is: %02d:%02d:%02d\n",tm.tm_hour, tm.tm_min, tm.tm_sec);   
    printf("System Date is: %02d/%02d/%02d\n",tm.tm_mday, tm.tm_mon+1, tm.tm_year+1900);
