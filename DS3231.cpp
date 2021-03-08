@@ -50,44 +50,32 @@ int main(){
       return 1;
    }
    
-   printf(" Read RTC Current Unset Values\n");   
+   printf("Read RTC Current Unset Values\n");   
    printf("The RTC time is %02d:%02d:%02d\n", bcdToDec(buf[2]), bcdToDec(buf[1]), bcdToDec(buf[0]));
    printf("The RTC Date is %02d-%02d-%02d\n", bcdToDec(buf[4]), bcdToDec(buf[5]), bcdToDec(buf[6]));
-   float temperature = buf[0x11] + ((buf[0x12]>>6)*0.25);
-   printf("The current temperature is %.2f°C\n", temperature);
-
-   // Test decTobcd Convertor
-   //printf("Buffer 0 = %d, Converted val = %d, Converted back = %d\n", buf[0], bcdToDec(buf[0]), decTobcd(bcdToDec(buf[0])));
-
-   // Test Write to Registers
-   //printf("Buffer 0 = %d, Converted val = %d\n", buf[1], bcdToDec(buf[1]));
-   //buf[0x01] = decTobcd(48);
-   //printf("Buffer 0 = %d, Converted val = %d\n", buf[1], bcdToDec(buf[1]));
-   //printf("The RTC time is %02d:%02d:%02d\n", bcdToDec(buf[2]), bcdToDec(buf[1]), bcdToDec(buf[0]));
+      
+   //The following is modified from https://www.includehelp.com/c-programs/system-date-time-linux.aspx
+   time_t T= time(NULL);
+   struct  tm tm = *localtime(&T);
    
-   //Modified from https://www.includehelp.com/c-programs/system-date-time-linux.aspx
-
-    time_t T= time(NULL);
-    struct  tm tm = *localtime(&T);
-    
-    //printf("The RTC time is %02d:%02d:%02d\n", bcdToDec(buf[2]), bcdToDec(buf[1]), bcdToDec(buf[0]));
-    //printf("The RTC Date is %02d-%02d-%02d\n", bcdToDec(buf[4]), bcdToDec(buf[5]), bcdToDec(buf[6]));
+   printf("\nRead System Date and Time Values\n");   
+   printf("System Time is: %02d:%02d:%02d\n",tm.tm_hour, tm.tm_min, tm.tm_sec);   
+   printf("System Date is: %02d/%02d/%02d\n",tm.tm_mday, tm.tm_mon+1, tm.tm_year+1900);
+   	
+   buf[0x02] = decTobcd(tm.tm_hour);
+   buf[0x01] = decTobcd(tm.tm_min);
+   buf[0x00] = decTobcd(tm.tm_sec);
 	
-    printf("System Date is: %02d/%02d/%02d\n",tm.tm_mday, tm.tm_mon+1, tm.tm_year+1900);
-    printf("System Time is: %02d:%02d:%02d\n\n",tm.tm_hour, tm.tm_min, tm.tm_sec);
-    	
-	buf[0x02] = decTobcd(tm.tm_hour);
-	buf[0x01] = decTobcd(tm.tm_min);
-	buf[0x00] = decTobcd(tm.tm_sec);
+   buf[0x04] = decTobcd(tm.tm_mday);
+   buf[0x05] = decTobcd(tm.tm_mon+1);
+   buf[0x06] = decTobcd(tm.tm_year-100);
 	
-	buf[0x04] = decTobcd(tm.tm_mday);
-	buf[0x05] = decTobcd(tm.tm_mon+1);
-	buf[0x06] = decTobcd(tm.tm_year-100);
-	
-    printf("Set System time to RTC\n");	
-    printf("The RTC time is %02d:%02d:%02d\n", bcdToDec(buf[2]), bcdToDec(buf[1]), bcdToDec(buf[0]));
-    printf("The RTC Date is %02d-%02d-%02d\n", bcdToDec(buf[4]), bcdToDec(buf[5]), bcdToDec(buf[6]));
-
+   printf("\nWrite System time to RTC\n");	
+   printf("The RTC time is %02d:%02d:%02d\n", bcdToDec(buf[2]), bcdToDec(buf[1]), bcdToDec(buf[0]));
+   printf("The RTC Date is %02d-%02d-%02d\n", bcdToDec(buf[4]), bcdToDec(buf[5]), bcdToDec(buf[6]));
+  
+   float temperature = buf[0x11] + ((buf[0x12]>>6)*0.25);
+   printf("\n\nCurrent RTC temperature reading is = %.2f°C\n", temperature);
 
    close(file);
    printf("\n\nScript Complete\n");  

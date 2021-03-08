@@ -1,3 +1,4 @@
+#!/bin/bash
 
 if [ "$1" == "" ]; then
     printf  "ERROR: First Arg is empty, Please Provide Commit Comment"
