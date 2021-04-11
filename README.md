@@ -11,7 +11,7 @@ pi@RPIGCIOT:~ $ vim .bashrc
 Uncomment the ll alias for ls -l 
 
 to enable within session run the following, other wise close down and start new session
-pi@RPIGCIOT:~ $ exec bach
+pi@RPIGCIOT:~ $ exec bash
 
 
 
